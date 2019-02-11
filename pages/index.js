@@ -140,8 +140,6 @@ export default class extends React.Component {
       main_margin = 0;
     }
 
-    console.log(render_info);
-
     return (
       <div>
         <Head>
