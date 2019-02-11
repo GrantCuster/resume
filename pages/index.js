@@ -62,12 +62,10 @@ let links = [
     "https://grantcuster.github.io/umap-explorer",
     "A proof-of-concept that uses three.js to render tens of thousands of data points in an interactive visualization"
   ],
+  ["https://blog.fastforwardlabs.com", "The Cloudera Fast Forward Labs blog."],
   [
-    "https://github.com/fastforwardlabs/prototype-videos",
-    "The Cloudera Fast Forward Labs blog."
-  ][
-    ("https://scifi.fastforwardlabs.com",
-    "A mini-site showcasing the science fiction stories included in each of the Fast Forward Labs reports.")
+    "https://scifi.fastforwardlabs.com",
+    "A mini-site showcasing the science fiction stories included in each of the Fast Forward Labs reports."
   ]
 ];
 
