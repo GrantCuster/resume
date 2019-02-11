@@ -201,6 +201,7 @@ export default class extends React.Component {
               marginLeft: main_margin
             }}
           >
+            <div>Grant Custer</div>
             <div style={{ marginBottom: grem }}>
               <p>{description}</p>
             </div>
@@ -208,19 +209,19 @@ export default class extends React.Component {
               <div>Work experience</div>
             </div>
             <div style={{ marginBottom: grem * 1 }}>
-              <div>Designer–Developer, Cloudera Fast Forward Labs</div>
+              <div>Designer–developer, Cloudera Fast Forward Labs</div>
               <div>{formatTime(new Date(2014, 7, 7), new Date())}</div>
               <div>
                 <p>
-                  Designed and coded the front-end for nine product prototypes
+                  Designed and coded the interfaces for nine product prototypes
                   demonstrating the possibilities of emerging technologies.
                 </p>
                 <p>
-                  Designed the Fast Forward Labs and brand and surrounding
-                  material, including nine printed research reports, the
-                  website, the blog, and internal tools. Post-Cloudera
-                  acquisition (in 2017) I've been working to integrate that
-                  brand into the larger Cloudera brand system.
+                  Designed the Fast Forward Labs brand and surrounding material,
+                  including nine printed research reports, the website, the
+                  blog, and internal tools. Post-Cloudera acquisition (in 2017)
+                  I've been working to integrate that brand into the larger
+                  Cloudera brand system.
                 </p>
                 <p>
                   Managed two projects by FFL interns, where they scoped,
@@ -229,7 +230,7 @@ export default class extends React.Component {
               </div>
             </div>
             <div style={{ marginBottom: grem * 1 }}>
-              <div>Designer–Developer, Betaworks</div>
+              <div>Designer–developer, Betaworks</div>
               <div>
                 {formatTime(new Date(2012, 6, 15), new Date(2014, 7, 28))}
               </div>
@@ -239,7 +240,7 @@ export default class extends React.Component {
               </p>
             </div>
             <div style={{ marginBottom: grem * 1 }}>
-              <div>Designer–Developer, Banters</div>
+              <div>Designer–developer, Banters</div>
               <div>
                 {formatTime(new Date(2011, 11, 1), new Date(2012, 6, 15))}
               </div>
@@ -250,7 +251,7 @@ export default class extends React.Component {
             </div>
             <div style={{ marginTop: grem }}>
               <div>Code and software experience</div>
-              <p>Code: Javascript, React, D3, three.js.</p>
+              <p>Code: Javascript, React, D3.js, three.js.</p>
               <p>Software: Figma, Photoshop, Illustrator, InDesign.</p>
             </div>
             <div style={{ marginBottom: grem, marginTop: grem }}>
@@ -266,7 +267,10 @@ export default class extends React.Component {
             <div style={{}}>
               <div>Contact</div>
               <p>Email: grantcuster@gmail.com</p>
-              <p>Twitter: @GrantCuster</p>
+              <p>
+                Twitter:{" "}
+                <a href="https://twitter.com/GrantCuster">@GrantCuster</a>
+              </p>
             </div>
           </div>
           <div style={{ padding: grem / 2 }}>
