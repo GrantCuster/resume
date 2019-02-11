@@ -84,7 +84,8 @@ export default class extends React.Component {
       width: null,
       height: null,
       layout: "web",
-      render_info: null
+      render_info: null,
+      origin: null
     };
     this.link = this.link.bind(this);
     this.setSize = _.debounce(this.setSize.bind(this), 100);
@@ -106,7 +107,7 @@ export default class extends React.Component {
     window.addEventListener("resize", this.setSize);
     let render_info = Bowser.getParser(window.navigator.userAgent).parse()
       .parsedResult;
-    this.setState({ render_info });
+    this.setState({ render_info, origin: window.location.href });
   }
 
   componentWillUnmount() {
@@ -122,7 +123,7 @@ export default class extends React.Component {
   }
 
   render() {
-    let { loaded, width, height, layout, render_info } = this.state;
+    let { loaded, width, height, layout, render_info, origin } = this.state;
     let font_size = 16;
     let line_height = 1.5;
     let grem = font_size * line_height;
@@ -269,8 +270,10 @@ export default class extends React.Component {
             </div>
           </div>
           <div style={{ padding: grem / 2 }}>
-            Generated from {this.link("https://resume.grantcuster.com")} on{" "}
-            {new Date().toLocaleString()}
+            Generated
+            {origin !== null ? (
+              <span> from {this.link(origin)}</span>
+            ) : null} on {new Date().toLocaleString()}
             {render_info !== null
               ? ` with ${render_info.browser.name} ${
                   render_info.browser.version
