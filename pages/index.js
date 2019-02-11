@@ -63,10 +63,16 @@ let links = [
     "A proof-of-concept that uses three.js to render tens of thousands of data points in an interactive visualization"
   ],
   [
-    "https://scifi.fastforwardlabs.com",
-    "A mini-site showcasing the science fiction stories included in each of the Fast Forward Labs reports."
+    "https://github.com/fastforwardlabs/prototype-videos",
+    "The Cloudera Fast Forward Labs blog."
+  ][
+    ("https://scifi.fastforwardlabs.com",
+    "A mini-site showcasing the science fiction stories included in each of the Fast Forward Labs reports.")
   ]
 ];
+
+let description =
+  "Designer and front-end developer interested in procedural generation, data visualization, product design and rethinking things from scratch.";
 
 export default class extends React.Component {
   static async getInitialProps({ req }) {
@@ -143,14 +149,17 @@ export default class extends React.Component {
     return (
       <div>
         <Head>
-          <title>Grant Custer → Résumé</title>
           <meta
-            type="description"
-            value="
-            Designer and front-end developer interested in procedural
-            generation, data visualization, product design and rethinking things
-            from scratch."
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+          <meta name="theme-color" content="#efefef" />
+          <title>Grant Custer → Résumé</title>
+          <meta type="description" value={description} />
+          <meta property="og:title" content="Grant Custer → Résumé" />
+          <meta property="og:description" content={description} />
+          <meta property="og:url" content="http://resume.grantcuster.com" />
+          <meta name="twitter:card" content="summary" />
         </Head>
         <div>
           <div style={{ padding: grem / 2 }}>
@@ -194,11 +203,7 @@ export default class extends React.Component {
             }}
           >
             <div style={{ marginBottom: grem }}>
-              <p>
-                Designer and front-end developer interested in procedural
-                generation, data visualization, product design and rethinking
-                things from scratch.
-              </p>
+              <p>{description}</p>
             </div>
             <div style={{ marginBottom: grem * 1 }}>
               <div>Work experience</div>
