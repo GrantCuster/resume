@@ -290,6 +290,9 @@ export default class extends React.Component {
           * {
             box-sizing: border-box;
           }
+          @page {
+            margin: calc(0.75in - ${grem}px);
+          }
           html {
             font-size: ${font_size}px;
             line-height: ${line_height};
