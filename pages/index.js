@@ -165,36 +165,16 @@ export default class extends React.Component {
             <div>Grant Custer</div>
             <div>Design–Code</div>
             <div style={{ minHeight: grem }}>
-              {width !== null && height !== null ? `${width}x${height}` : null}
+              <span className="print-hide">
+                {width !== null && height !== null
+                  ? `${width}x${height}`
+                  : null}
+              </span>
             </div>
             <div>Résumé</div>
-            <p>
-              Layout:{" "}
-              {layout === "web" ? (
-                "web"
-              ) : (
-                <button
-                  onClick={() => {
-                    this.setLayout("web");
-                  }}
-                >
-                  web
-                </button>
-              )}{" "}
-              {layout === "print" ? (
-                "print"
-              ) : (
-                <button
-                  onClick={() => {
-                    this.setLayout("print");
-                  }}
-                >
-                  print
-                </button>
-              )}
-            </p>
           </div>
           <div
+            className="content"
             style={{
               width: main_width,
               padding: grem / 2,
@@ -292,6 +272,15 @@ export default class extends React.Component {
           }
           @page {
             margin: calc(0.75in - ${grem}px);
+          }
+          @media print {
+            .content {
+              width: auto !important;
+              margin: auto !important;
+            }
+            .print-hide {
+              display: none;
+            }
           }
           html {
             font-size: ${font_size}px;
