@@ -80,9 +80,8 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
-      width: null,
-      height: null,
+      width: 600,
+      height: 800,
       layout: "web",
       render_info: null,
       origin: null
@@ -101,10 +100,7 @@ export default class extends React.Component {
 
   componentDidMount() {
     this.setSize();
-    this.setState({
-      loaded: true
-    });
-    window.addEventListener("resize", this.setSize);
+   window.addEventListener("resize", this.setSize);
     let render_info = Bowser.getParser(window.navigator.userAgent).parse()
       .parsedResult;
     this.setState({ render_info, origin: window.location.href });
@@ -123,7 +119,7 @@ export default class extends React.Component {
   }
 
   render() {
-    let { loaded, width, height, layout, render_info, origin } = this.state;
+    let { width, height, layout, render_info, origin } = this.state;
     let font_size = 16;
     let line_height = 1.5;
     let grem = font_size * line_height;
