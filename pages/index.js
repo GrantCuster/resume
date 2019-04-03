@@ -81,8 +81,8 @@ export default class extends React.Component {
     super(props);
     this.state = {
       loaded: false,
-      width: 600,
-      height: 800,
+      width: null,
+      height: null,
       layout: "web",
       render_info: null,
       origin: null
@@ -157,8 +157,12 @@ export default class extends React.Component {
           <meta property="og:description" content={description} />
           <meta property="og:url" content="http://resume.grantcuster.com" />
           <meta name="twitter:card" content="summary" />
+          <style>{`.js-no-flash { display: none }`}</style> 
+          <noscript>
+            <style>{`.js-no-flash { display: block }`}</style> 
+          </noscript>
         </Head>
-        <div style={{margin: loaded ? '0' : `${grem}px auto`, width: loaded ? 'auto' : width, border: loaded ? 'none' : 'solid 1px black' }}>
+        <div className="js-no-flash" style={{ display: loaded ? 'block' : null }}>
           <div style={{ padding: grem / 2 }}>
             <div>Grant Custer</div>
             <div>Design–Code</div>
