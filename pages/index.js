@@ -80,6 +80,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loaded: false,
       width: 600,
       height: 800,
       layout: "web",
@@ -94,7 +95,8 @@ export default class extends React.Component {
   setSize() {
     this.setState({
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
+      loaded: true
     });
   }
 
@@ -119,7 +121,7 @@ export default class extends React.Component {
   }
 
   render() {
-    let { width, height, layout, render_info, origin } = this.state;
+    let { loaded, width, height, layout, render_info, origin } = this.state;
     let font_size = 16;
     let line_height = 1.5;
     let grem = font_size * line_height;
@@ -156,7 +158,7 @@ export default class extends React.Component {
           <meta property="og:url" content="http://resume.grantcuster.com" />
           <meta name="twitter:card" content="summary" />
         </Head>
-        <div>
+        <div style={{margin: loaded ? '0' : `${grem}px auto`, width: loaded ? 'auto' : width, border: loaded ? 'none' : 'solid 1px black' }}>
           <div style={{ padding: grem / 2 }}>
             <div>Grant Custer</div>
             <div>Design–Code</div>
