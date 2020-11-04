@@ -1,146 +1,142 @@
-import Head from "next/head";
-import React from "react";
-import _ from "lodash";
-import * as d3 from "d3-time";
-import * as d3f from "d3-time-format";
-import * as Pluralize from "pluralize";
-import * as Bowser from "bowser";
+import Head from 'next/head'
+import React from 'react'
+import _ from 'lodash'
+import * as d3 from 'd3-time'
+import * as d3f from 'd3-time-format'
+import * as Pluralize from 'pluralize'
+import * as Bowser from 'bowser'
 
 function p(x, y) {
-  return `${x}px ${y}px`;
+  return `${x}px ${y}px`
 }
 
-let format = d3f.timeFormat("%B %Y");
+let format = d3f.timeFormat('%B %Y')
 
 // with days
 function timeSpent(start, end) {
-  let raw_months = d3.timeMonth.count(start, end);
-  let years = Math.floor(raw_months / 12);
-  let months = years > 0 ? raw_months % years : raw_months;
-  let months_end = d3.timeMonth.offset(start, raw_months);
-  let days = d3.timeDay.count(months_end, end);
+  let raw_months = d3.timeMonth.count(start, end)
+  let years = Math.floor(raw_months / 12)
+  let months = years > 0 ? raw_months % years : raw_months
+  let months_end = d3.timeMonth.offset(start, raw_months)
+  let days = d3.timeDay.count(months_end, end)
   // round months
-  if (days > 15) months++;
-  let values = [];
+  if (days > 15) months++
+  let values = []
   if (years > 0) {
-    values.push(years + " " + Pluralize("year", years));
+    values.push(years + ' ' + Pluralize('year', years))
   }
   if (months > 0) {
-    values.push(months + " " + Pluralize("month", months));
+    values.push(months + ' ' + Pluralize('month', months))
   }
   if (days > 0) {
     // values.push(days + " " + Pluralize("day", days));
   }
-  return values.join(", ");
+  return values.join(', ')
 }
 
 function formatTime(start, end) {
   return (
     format(start) +
-    "–" +
-    (+end === +new Date() ? "now" : format(end)) +
-    ", " +
+    '–' +
+    (+end === +new Date() ? 'now' : format(end)) +
+    ', ' +
     timeSpent(start, end)
-  );
+  )
 }
 
 let links = [
-  ["http://feed.grantcuster.com", "Work and inspiration in progress."],
   [
-    "https://turbofan.fastforwardlabs.com",
-    "A Cloudera Fast Forward Labs prototype that places you in the role of turbofan factory owner."
+    'https://constraint.systems',
+    'An ongoing project where I design and code experimental web-based creative tools.',
   ],
   [
-    "https://fastforwardlabs.github.io/prototype-videos",
-    "A video overview of the nine prototypes we've built at Cloudera Fast Forward Labs."
+    'https://activelearner.fastforwardlabs.com',
+    'A visualization of how you can use active learning to select training examples to label. I used three.js to render the points and animate the results of each training step.',
   ],
   [
-    "https://beta.observablehq.com/@grantcuster",
-    "Code and design experiments in the form of interactive Observable notebooks."
+    'https://turbofan.fastforwardlabs.com/',
+    'Turbofan Tycoon illustrates the strengths of federated learning by letting you choose a maintenance strategy for your factory of turbofans. I had a lot of fun building a fast-moving turbofan dashboard.',
   ],
+  ['https://feed.grantcuster.com', 'Work and inspiration in progress.'],
   [
-    "https://grantcuster.github.io/umap-explorer",
-    "A proof-of-concept that uses three.js to render tens of thousands of data points in an interactive visualization"
+    'https://blog.fastforwardlabs.com',
+    'The Cloudera Fast Forward Labs blog. I built and maintain the blog (in Hugo!) and also do a lot of the design work displayed on it.',
   ],
-  ["https://blog.fastforwardlabs.com", "The Cloudera Fast Forward Labs blog."],
-  [
-    "https://scifi.fastforwardlabs.com",
-    "A mini-site showcasing the science fiction stories included in each of the Fast Forward Labs reports."
-  ]
-];
+  ['https://grantcuster.com', 'My index page, featuring even more links.'],
+]
 
 let description =
-  "Designer and front-end developer interested in procedural generation, data visualization, product design and rethinking things from scratch.";
+  'Designer-programmer. Interested in alternative interfaces and demystifying computers.'
 
 export default class extends React.Component {
   static async getInitialProps({ req }) {
-    return { test: null };
+    return { test: null }
   }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       loaded: false,
       width: null,
       height: null,
-      layout: "web",
+      layout: 'web',
       render_info: null,
-      origin: null
-    };
-    this.link = this.link.bind(this);
-    this.setSize = _.debounce(this.setSize.bind(this), 100);
-    this.setLayout = this.setLayout.bind(this);
+      origin: null,
+    }
+    this.link = this.link.bind(this)
+    this.setSize = _.debounce(this.setSize.bind(this), 100)
+    this.setLayout = this.setLayout.bind(this)
   }
 
   setSize() {
     this.setState({
       width: window.innerWidth,
       height: window.innerHeight,
-      loaded: true
-    });
+      loaded: true,
+    })
   }
 
   componentDidMount() {
-    this.setSize();
-   window.addEventListener("resize", this.setSize);
+    this.setSize()
+    window.addEventListener('resize', this.setSize)
     let render_info = Bowser.getParser(window.navigator.userAgent).parse()
-      .parsedResult;
-    this.setState({ render_info, origin: window.location.href });
+      .parsedResult
+    this.setState({ render_info, origin: window.location.href })
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.setSize);
+    window.removeEventListener('resize', this.setSize)
   }
 
   setLayout(layout) {
-    this.setState({ layout: layout });
+    this.setState({ layout: layout })
   }
 
   link(href) {
-    return <a href={href}>{href}</a>;
+    return <a href={href}>{href}</a>
   }
 
   render() {
-    let { loaded, width, height, layout, render_info, origin } = this.state;
-    let font_size = 16;
-    let line_height = 1.5;
-    let grem = font_size * line_height;
+    let { loaded, width, height, layout, render_info, origin } = this.state
+    let font_size = 16
+    let line_height = 1.5
+    let grem = font_size * line_height
 
-    let column_target = grem * 14;
-    let columns = Math.max(1, Math.round(width / column_target));
-    let column_width = width / columns;
-    let main_width = Math.min(columns, 2) * column_width;
+    let column_target = grem * 14
+    let columns = Math.max(1, Math.round(width / column_target))
+    let column_width = width / columns
+    let main_width = Math.min(columns, 2) * column_width
     let main_margin =
-      Math.floor((columns - Math.min(columns, 2)) / 2) * column_width;
+      Math.floor((columns - Math.min(columns, 2)) / 2) * column_width
 
-    if (layout === "print") {
-      width = null;
-      height = null;
+    if (layout === 'print') {
+      width = null
+      height = null
     }
 
     if (width === null) {
-      main_width = "auto";
-      main_margin = 0;
+      main_width = 'auto'
+      main_margin = 0
     }
 
     return (
@@ -157,12 +153,15 @@ export default class extends React.Component {
           <meta property="og:description" content={description} />
           <meta property="og:url" content="http://resume.grantcuster.com" />
           <meta name="twitter:card" content="summary" />
-          <style>{`.js-no-flash { display: none }`}</style> 
+          <style>{`.js-no-flash { display: none }`}</style>
           <noscript>
-            <style>{`.js-no-flash { display: block }`}</style> 
+            <style>{`.js-no-flash { display: block }`}</style>
           </noscript>
         </Head>
-        <div className="js-no-flash" style={{ display: loaded ? 'block' : null }}>
+        <div
+          className="js-no-flash"
+          style={{ display: loaded ? 'block' : null }}
+        >
           <div style={{ padding: grem / 2 }}>
             <div>Grant Custer</div>
             <div>Design–Code</div>
@@ -180,7 +179,7 @@ export default class extends React.Component {
             style={{
               width: main_width,
               padding: grem / 2,
-              marginLeft: main_margin
+              marginLeft: main_margin,
             }}
           >
             <div>Grant Custer</div>
@@ -233,13 +232,13 @@ export default class extends React.Component {
             </div>
             <div style={{ marginTop: grem }}>
               <div>Code and software experience</div>
-              <p>Code: Javascript, React, D3.js, three.js.</p>
+              <p>Code: Javascript, React, D3.js, three.js, HTML, CSS.</p>
               <p>Software: Figma, Photoshop, Illustrator, InDesign.</p>
             </div>
             <div style={{ marginBottom: grem, marginTop: grem }}>
               <div>Links</div>
               <div>
-                {links.map(l => (
+                {links.map((l) => (
                   <p>
                     {this.link(l[0])} – {l[1]}
                   </p>
@@ -250,8 +249,12 @@ export default class extends React.Component {
               <div>Contact</div>
               <p>Email: grantcuster@gmail.com</p>
               <p>
-                Twitter:{" "}
+                Twitter:{' '}
                 <a href="https://twitter.com/GrantCuster">@GrantCuster</a>
+              </p>
+              <p>
+                Mastodon:{' '}
+                <a href="https://vis.social/@GrantCuster">@GrantCuster</a>
               </p>
             </div>
           </div>
@@ -261,9 +264,7 @@ export default class extends React.Component {
               <span> from {this.link(origin)}</span>
             ) : null} on {new Date().toLocaleString()}
             {render_info !== null
-              ? ` with ${render_info.browser.name} ${
-                  render_info.browser.version
-                } on ${render_info.os.name} ${render_info.os.version}`
+              ? ` with ${render_info.browser.name} ${render_info.browser.version} on ${render_info.os.name}`
               : null}
             .
           </div>
@@ -291,9 +292,9 @@ export default class extends React.Component {
           body {
             margin: 0;
             background: #efefef;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-              Helvetica, Arial, sans-serif, "Apple Color Emoji",
-              "Segoe UI Emoji", "Segoe UI Symbol";
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+              Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+              'Segoe UI Emoji', 'Segoe UI Symbol';
           }
           p {
             margin: 0;
@@ -317,6 +318,6 @@ export default class extends React.Component {
           }
         `}</style>
       </div>
-    );
+    )
   }
 }
