@@ -190,7 +190,7 @@ export default class extends React.Component {
               <div>Work experience</div>
             </div>
             <div style={{ marginBottom: grem * 1 }}>
-              <div>Designer–developer, Stealth StartUp</div>
+              <div>Designer–developer, Stealth Startup</div>
               <div>{formatTime(new Date(2021, 1, 15), new Date())}</div>
             </div>
 
